@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Customs · Resolved Board</title>
+<style>
+:root{--yale:#00356b;--paper:#f6f1e7;--ink:#1d2330;--muted:#6f7787;--line:#e4ddcf;--ok:#2f7d5b;--gold:#c9a227}
+*{box-sizing:border-box} body{margin:0;font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper)}
+h1,h2{font-family:"Iowan Old Style",Palatino,Georgia,serif;margin:0}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.84em;background:#f1ece2;padding:1px 5px;border-radius:5px}
+.awning{background:linear-gradient(180deg,#00356b,#0b4a8b);color:#fff;padding:20px 32px 16px}
+.awning h1{font-size:28px} .awning p{margin:4px 0 0;opacity:.85;font-size:14px}
+.scallop{height:14px;background:radial-gradient(circle at 10px 0,#0b4a8b 10px,transparent 10.5px) 0 0/20px 14px repeat-x}
+main{max-width:1100px;margin:0 auto;padding:22px 28px 40px}
+.till{background:linear-gradient(160deg,#002a55,#001b38);color:#f4e9d4;border-radius:18px;padding:18px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;box-shadow:0 14px 34px -18px rgba(0,27,56,.9);margin-bottom:22px}
+.till .lbl{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);font-weight:700}
+.till .amt{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:30px;font-variant-numeric:tabular-nums}
+.till .step{display:flex;flex-direction:column} .till .out{color:#ffb3ab} .till .arr{opacity:.5;font-size:22px}
+.till .end .amt{font-size:38px;color:#fff} .till small{opacity:.7;font-size:12px}
+.ticket{display:grid;grid-template-columns:86px 1fr;background:#fff;border:1px solid var(--line);border-radius:16px;margin-bottom:18px;box-shadow:0 8px 24px -14px rgba(29,35,48,.25);overflow:hidden}
+.stub{background:var(--ok);color:#f4e9d4;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:"Iowan Old Style",Palatino,Georgia,serif;position:relative}
+.stub span{font-size:11px;letter-spacing:1px;opacity:.8} .stub b{font-size:30px} .stub em{font-style:normal;font-family:-apple-system,sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;opacity:.85}
+.stub::after{content:"";position:absolute;right:-6px;top:8px;bottom:8px;width:12px;background:radial-gradient(circle,#fff 3.5px,transparent 4px) 0 0/12px 11px repeat-y}
+.body{padding:16px 20px 14px 22px} header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.type{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)} h2{font-size:21px;margin:2px 0} .who{font-size:13.5px;color:#4b5466}
+.pill{background:#dff1e8;color:#1f6447;font-weight:800;font-size:12px;letter-spacing:.8px;padding:4px 10px;border-radius:999px}
+.path{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:12px 0}
+.agent{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;border:1px solid color-mix(in srgb,var(--c) 35%,#fff);background:color-mix(in srgb,var(--c) 8%,#fff);padding:3px 10px 3px 3px;border-radius:999px}
+.agent b{background:var(--c);color:#fff;font-size:10px;border-radius:50%;width:22px;height:22px;display:grid;place-items:center}
+.agent.human{--c:#6a4c9c} .arrow{color:var(--muted)}
+.cols{display:grid;grid-template-columns:1fr 230px;gap:16px} @media(max-width:760px){.cols{grid-template-columns:1fr}}
+.facts{margin:0;padding-left:18px;font-size:14px;line-height:1.55}
+.side{background:#fbf8f2;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.label{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:700;margin:2px 0 4px}
+.decisions{list-style:none;margin:0 0 8px;padding:0;font-size:13px} .decision b{font-size:11px;padding:1px 6px;border-radius:4px;color:#fff;margin-right:4px}
+.decision.payment b{background:var(--yale)} .decision.discount b{background:#6a4c9c} .decision small{color:var(--muted)}
+.cash-move{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:20px;font-weight:700}
+.tools{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center} .tools .label{margin:0 4px 0 0}
+footer{margin-top:10px;font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.source{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.6}
+</style></head><body>
+<div class="awning"><h1>Campus Customs · Resolved Board</h1>
+<p>Problem 9 final clean run · shop date 2026-08-31 · all 3 tickets resolved</p></div><div class="scallop"></div>
+<main>
+  <section class="till" aria-label="Cash">
+    <div class="step"><span class="lbl">Start (after reset)</span><span class="amt">$3,400.00</span><small>#343</small></div>
+    <span class="arr">→</span>
+    <div class="step"><span class="lbl">#101 invoice 501</span><span class="amt out">−$840.00</span><small>approved by Kanushri · #362</small></div>
+    <span class="arr">→</span>
+    <div class="step"><span class="lbl">#102 rent, lease 1</span><span class="amt out">−$2,400.00</span><small>approved by Kanushri · #397</small></div>
+    <span class="arr">→</span>
+    <div class="step"><span class="lbl">#103 discount</span><span class="amt">$0.00</span><small>decision only, not a payment</small></div>
+    <span class="arr">=</span>
+    <div class="step end"><span class="lbl">Ending checking</span><span class="amt">$160.00</span><small>matches cash_accounts</small></div>
+  </section>
+  
+  <article class="ticket">
+    <div class="stub"><span>No.</span><b>101</b><em>resolved</em></div>
+    <div class="body">
+      <header><div><div class="type">customer order</div><h2>Bulldog tee</h2><div class="who">Tauhid Zaman · “Needs a tee in size S.”</div></div>
+        <span class="pill">RESOLVED</span></header>
+      <div class="path"><span class="agent" style="--c:#00356b"><b>BO</b>Boss</span><span class="arrow">→</span><span class="agent" style="--c:#2f7d5b"><b>IN</b>Inventory</span><span class="arrow">→</span><span class="agent" style="--c:#b0711c"><b>AC</b>Accounting</span><span class="arrow">→</span><span class="agent" style="--c:#2f7d5b"><b>IN</b>Inventory</span><span class="arrow">→</span><span class="agent" style="--c:#c0463f"><b>CS</b>Customer Service</span></div>
+      <div class="cols">
+        <ul class="facts"><li>Invoice 501 ($840, 3 days overdue) <b>paid</b>; Bulldog Print Co unblocked</li><li>Restock <b>draft</b>: 1 tee from Bulldog Print Co, arriving <b>2026-09-05</b> (not sent)</li><li>Reply to Tauhid Zaman <b>drafted</b> (not sent). Its greeting is duplicated</li><li>Size S on hand: <b>0</b>. Nothing was received</li></ul>
+        <div class="side">
+          <div class="label">Human decisions</div><ul class="decisions"><li class="decision payment"><b>PAYMENT</b> approved by Kanushri <small>#362</small></li></ul>
+          <div class="label">Cash</div><div class="cash-move">−$840.00</div>
+        </div>
+      </div>
+      <div class="tools"><span class="label">MCP tools</span><code>list_open_tickets</code><code>get_stock_and_margin_for_bulk_order</code><code>get_invoice_and_vendor_block_status</code><code>get_checking_balance</code><code>request_payment</code><code>request_vendor_restock</code><code>draft_customer_message</code><code>update_ticket_status</code></div>
+      <footer>Run <code>20261012-102659-928d21</code> · audit #344–#380 · 4 delegations · 16 model calls · status set at #378</footer>
+    </div>
+  </article>
+  <article class="ticket">
+    <div class="stub"><span>No.</span><b>102</b><em>resolved</em></div>
+    <div class="body">
+      <header><div><div class="type">rent notice</div><h2>Rent due</h2><div class="who">Elm City Properties · “Email: shop rent due in 2 days.”</div></div>
+        <span class="pill">RESOLVED</span></header>
+      <div class="path"><span class="agent" style="--c:#00356b"><b>BO</b>Boss</span><span class="arrow">→</span><span class="agent" style="--c:#6a4c9c"><b>FA</b>Facilities</span><span class="arrow">→</span><span class="agent" style="--c:#b0711c"><b>AC</b>Accounting</span></div>
+      <div class="cols">
+        <ul class="facts"><li>Facilities confirmed <b>$2,400</b> rent, due 2026-09-02</li><li>Rent <b>paid</b> after approval; next due <b>2026-10-02</b></li><li>No customer reply (landlord isn't a customer)</li></ul>
+        <div class="side">
+          <div class="label">Human decisions</div><ul class="decisions"><li class="decision payment"><b>PAYMENT</b> approved by Kanushri <small>#397</small></li></ul>
+          <div class="label">Cash</div><div class="cash-move">−$2,400.00</div>
+        </div>
+      </div>
+      <div class="tools"><span class="label">MCP tools</span><code>list_open_tickets</code><code>get_lease_rent_due_and_cash_coverage</code><code>get_checking_balance</code><code>request_payment</code><code>update_ticket_status</code></div>
+      <footer>Run <code>20261012-102802-d47dd0</code> · audit #381–#403 · 2 delegations · 10 model calls · status set at #401</footer>
+    </div>
+  </article>
+  <article class="ticket">
+    <div class="stub"><span>No.</span><b>103</b><em>resolved</em></div>
+    <div class="body">
+      <header><div><div class="type">price override</div><h2>Bulk hoodie discount</h2><div class="who">Yale AI Club · “Student org wants 20 hoodies, size M, asking for a bulk discount.”</div></div>
+        <span class="pill">RESOLVED</span></header>
+      <div class="path"><span class="agent" style="--c:#00356b"><b>BO</b>Boss</span><span class="arrow">→</span><span class="agent" style="--c:#2f7d5b"><b>IN</b>Inventory</span><span class="arrow">→</span><span class="agent human"><b>YOU</b>discount decision</span><span class="arrow">→</span><span class="agent" style="--c:#c0463f"><b>CS</b>Customer Service</span></div>
+      <div class="cols">
+        <ul class="facts"><li><b>8</b> on hand, <b>12</b> short of 20 · cost $22.00 · list $58.00</li><li>You approved <b>$50.00/hoodie</b>: order $1,000.00 vs $1,160.00 at list</li><li>Catalogue price still <b>$58.00</b> · no cash moved</li><li>Reply to the Yale AI Club <b>drafted</b> (not sent). No restock: no vendor linked</li></ul>
+        <div class="side">
+          <div class="label">Human decisions</div><ul class="decisions"><li class="decision discount"><b>DISCOUNT</b> approved by Kanushri <small>#415</small></li></ul>
+          <div class="label">Cash</div><div class="cash-move">$0.00</div>
+        </div>
+      </div>
+      <div class="tools"><span class="label">MCP tools</span><code>list_open_tickets</code><code>get_stock_and_margin_for_bulk_order</code><code>request_discount_decision</code><code>draft_customer_message</code><code>update_ticket_status</code></div>
+      <footer>Run <code>20261012-103013-77fb78</code> · audit #404–#426 · 2 delegations · 11 model calls · status set at #424</footer>
+    </div>
+  </article>
+  <p class="source">Source: <code>output/audit_trail.json</code> events #343–#426 (reset <code>reset-20261012-102641-00d174</code>) and <code>data/campus_customs_new.db</code>; full details in <code>output/resolved_tickets.json</code>. "Resolved" means the desk finished every action within its control using real data and recorded every human decision. No stock arrived and no time passed. Customer replies and the restock are drafts and were not sent.</p>
+</main></body></html>

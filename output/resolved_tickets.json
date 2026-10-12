@@ -1,0 +1,516 @@
+{
+  "title": "Campus Customs: resolved tickets (Problem 9 final clean run)",
+  "source_of_truth": {
+    "audit_trail": "output/audit_trail.json",
+    "database": "data/campus_customs_new.db",
+    "reset": {
+      "run_id": "reset-20261012-102641-00d174",
+      "audit_seq": 343,
+      "logged_at": "2026-10-12T14:26:41+00:00"
+    },
+    "runs": {
+      "101": "20261012-102659-928d21",
+      "102": "20261012-102802-d47dd0",
+      "103": "20261012-103013-77fb78"
+    },
+    "audit_seq_range": [
+      343,
+      426
+    ],
+    "shop_date": "2026-08-31",
+    "note": "Only events from this reset onward are used. Earlier test runs remain in the audit trail unchanged."
+  },
+  "cash": {
+    "account": "checking",
+    "starting_balance": 3400.0,
+    "payments": [
+      {
+        "payment_id": 1,
+        "ticket_id": 101,
+        "kind": "invoice",
+        "ref_id": 501,
+        "amount": 840.0,
+        "approved_by": "Kanushri",
+        "paid_at": "2026-08-31",
+        "balance_before": 3400.0,
+        "balance_after": 2560.0,
+        "approval_audit_seq": 362,
+        "result_audit_seq": 363,
+        "why": "Invoice 501 to Bulldog Print Co ($840, 3 days overdue) blocked the vendor from shipping the size S tee restock for ticket 101."
+      },
+      {
+        "payment_id": 2,
+        "ticket_id": 102,
+        "kind": "rent",
+        "ref_id": 1,
+        "amount": 2400.0,
+        "approved_by": "Kanushri",
+        "paid_at": "2026-08-31",
+        "balance_before": 2560.0,
+        "balance_after": 160.0,
+        "approval_audit_seq": 397,
+        "result_audit_seq": 398,
+        "why": "Lease 1 rent to Elm City Properties ($2,400) due 2026-09-02 for ticket 102 (rent notice)."
+      }
+    ],
+    "ending_balance": 160.0,
+    "check": "3400.0 - 840.0 - 2400.0 = 160.0"
+  },
+  "tickets": [
+    {
+      "ticket_id": 101,
+      "type": "customer_order",
+      "requester": "Tauhid Zaman",
+      "subject": "Bulldog tee",
+      "request": "Needs a tee in size S.",
+      "final_status": "resolved",
+      "run_id": "20261012-102659-928d21",
+      "audit_seq_range": [
+        344,
+        380
+      ],
+      "started_at": "2026-10-12T14:26:59+00:00",
+      "finished_at": "2026-10-12T14:27:54+00:00",
+      "boss_called_first": "inventory",
+      "delegations": [
+        {
+          "order": 1,
+          "to": "inventory",
+          "audit_seq": 349,
+          "task": "Ticket 101: check sku CC-TEE-WHITE, size S, qty 1. Report stock/shortfall, and because linked invoice_id is 501, determine whether the relevant vendor is blocked by that invoice; if permissible and needed, draft restock and report lead time/date and result."
+        },
+        {
+          "order": 2,
+          "to": "accounting",
+          "audit_seq": 350,
+          "task": "Ticket 101: check linked invoice_id 501 (status and amount/due facts) and current checking balance. This run's cash planning covers only invoice 501. If invoice 501 is open or due and balance covers it, request payment and present human approval; otherwise report why not."
+        },
+        {
+          "order": 3,
+          "to": "inventory",
+          "audit_seq": 365,
+          "task": "Ticket 101: invoice_id 501 has now been paid per Accounting. For sku CC-TEE-WHITE, size S, qty 1, check current stock and now that vendor block is cleared, save a vendor restock draft if required. Report actual lead_days and expected arrival based on desk.date_today."
+        },
+        {
+          "order": 4,
+          "to": "customer_service",
+          "audit_seq": 373,
+          "task": "Ticket 101: Draft (do not send) a customer reply to Tauhid Zaman. Confirmed facts only: requested 1 CC-TEE-WHITE tee, size S; stock on hand 0, shortfall 1; linked invoice 501 for $840 was paid with human approval, clearing vendor block; Inventory saved a draft restock request for 1 from Bulldog Print Co with 5-day lead time and expected arrival 2026-09-05. Explain expected arrival, without claiming the item has arrived."
+        }
+      ],
+      "agents_not_called": [
+        "facilities"
+      ],
+      "mcp_tools_used": [
+        "list_open_tickets",
+        "get_stock_and_margin_for_bulk_order",
+        "get_invoice_and_vendor_block_status",
+        "get_checking_balance",
+        "request_payment",
+        "request_vendor_restock",
+        "draft_customer_message",
+        "update_ticket_status"
+      ],
+      "tool_calls": [
+        {
+          "audit_seq": 347,
+          "agent": "boss",
+          "tool": "list_open_tickets",
+          "args": {}
+        },
+        {
+          "audit_seq": 351,
+          "agent": "inventory",
+          "tool": "get_stock_and_margin_for_bulk_order",
+          "args": {
+            "sku": "CC-TEE-WHITE",
+            "size": "S",
+            "qty": 1
+          }
+        },
+        {
+          "audit_seq": 352,
+          "agent": "inventory",
+          "tool": "get_invoice_and_vendor_block_status",
+          "args": {
+            "invoice_id": 501
+          }
+        },
+        {
+          "audit_seq": 355,
+          "agent": "accounting",
+          "tool": "get_invoice_and_vendor_block_status",
+          "args": {
+            "invoice_id": 501
+          }
+        },
+        {
+          "audit_seq": 356,
+          "agent": "accounting",
+          "tool": "get_checking_balance",
+          "args": {}
+        },
+        {
+          "audit_seq": 359,
+          "agent": "accounting",
+          "tool": "request_payment",
+          "args": {
+            "kind": "invoice",
+            "ref_id": 501,
+            "amount": 840
+          }
+        },
+        {
+          "audit_seq": 366,
+          "agent": "inventory",
+          "tool": "get_stock_and_margin_for_bulk_order",
+          "args": {
+            "sku": "CC-TEE-WHITE",
+            "size": "S",
+            "qty": 1
+          }
+        },
+        {
+          "audit_seq": 367,
+          "agent": "inventory",
+          "tool": "get_invoice_and_vendor_block_status",
+          "args": {
+            "invoice_id": 501
+          }
+        },
+        {
+          "audit_seq": 370,
+          "agent": "inventory",
+          "tool": "request_vendor_restock",
+          "args": {
+            "vendor_id": 1,
+            "sku": "CC-TEE-WHITE",
+            "size": "S",
+            "qty": 1
+          }
+        },
+        {
+          "audit_seq": 374,
+          "agent": "customer_service",
+          "tool": "draft_customer_message",
+          "args": {
+            "ticket_id": 101,
+            "message": "Hi Tauhid,\n\nWe’re currently out of the CC-TEE-WHITE tee in size S, so we don’t have the requested item on hand yet. A restock request has been drafted, and the expected arrival is September 5, 2026. The item has not arrived yet.\n\nWe’ll follow up if there’s an update."
+          }
+        },
+        {
+          "audit_seq": 377,
+          "agent": "boss",
+          "tool": "update_ticket_status",
+          "args": {
+            "ticket_id": 101,
+            "status": "resolved",
+            "note": "Invoice 501 ($840) paid with human approval, clearing vendor block. Inventory saved a draft restock for 1 CC-TEE-WHITE, size S (5-day lead; expected arrival 2026-09-05). Customer Service drafted, not sent, a reply stating the item is out of stock and expected arrival; item has not arrived."
+          }
+        }
+      ],
+      "human_decisions": [
+        {
+          "audit_seq": 362,
+          "kind": "payment",
+          "decision": "approved",
+          "decided_by": "Kanushri"
+        }
+      ],
+      "cash_moved": 840.0,
+      "status_set_by_boss": {
+        "audit_seq": 378,
+        "previous": "open",
+        "new": "resolved"
+      },
+      "ticket_notes": "Needs a tee in size S. | [2026-08-31 resolved] Invoice 501 ($840) paid with human approval, clearing vendor block. Inventory saved a draft restock for 1 CC-TEE-WHITE, size S (5-day lead; expected arrival 2026-09-05). Customer Service drafted, not sent, a reply stating the item is out of stock and expected arrival; item has not arrived.",
+      "boss_final_report": "## Ticket 101 — Tauhid Zaman\n\n- **Request:** One Bulldog tee, CC-TEE-WHITE, size S.\n- **Key facts:** Inventory reported 0 on hand and a shortfall of 1. Unit cost was $8 and list price was $28. Invoice 501 to Bulldog Print Co was open for $840, due August 28, 2026, and 3 days overdue as of the shop date, August 31, 2026. Checking had $3,400 before payment, enough to cover it.\n- **Actions taken:** Accounting requested payment of invoice 501; the human approved it. Invoice status is now paid, checking is $2,560, and the vendor is no longer blocked. Inventory saved a draft restock request for 1 tee; the 5-day lead time gives an expected arrival of **September 5, 2026**. Customer Service drafted a reply and did not send it.\n- **Human approval:** Invoice payment approved.\n- **Customer message drafted:** The draft says the requested tee is out of stock, a restock request has been drafted, and expected arrival is September 5, 2026; it does not claim the item has arrived.\n- **Status:** Resolved.\n- **Still pending:** The restock is only a draft; the item has not arrived.",
+      "usage": {
+        "requests": 16,
+        "tool_calls": 15,
+        "input_tokens": 38063,
+        "output_tokens": 1890
+      },
+      "delegation_count": 4,
+      "outcome": {
+        "invoice_501": "paid",
+        "vendor_blocked_after": false,
+        "restock_draft": {
+          "file": "output/restock_requests/vendor1_CC-TEE-WHITE_S.json",
+          "vendor": "Bulldog Print Co",
+          "qty": 1,
+          "expected_arrival": "2026-09-05",
+          "sent": false
+        },
+        "customer_reply_draft": {
+          "file": "output/customer_drafts/ticket_101.md",
+          "sent": false,
+          "note": "Saved draft has a duplicated greeting (tool adds 'Hi Tauhid Zaman,' and the agent also wrote 'Hi Tauhid,')."
+        },
+        "size_S_on_hand_after": 0
+      }
+    },
+    {
+      "ticket_id": 102,
+      "type": "rent_notice",
+      "requester": "Elm City Properties",
+      "subject": "Rent due",
+      "request": "Email: shop rent due in 2 days.",
+      "final_status": "resolved",
+      "run_id": "20261012-102802-d47dd0",
+      "audit_seq_range": [
+        381,
+        403
+      ],
+      "started_at": "2026-10-12T14:28:02+00:00",
+      "finished_at": "2026-10-12T14:28:59+00:00",
+      "boss_called_first": "facilities",
+      "delegations": [
+        {
+          "order": 1,
+          "to": "facilities",
+          "audit_seq": 386,
+          "task": "Ticket 102: confirm the rent amount and due date from lease_id 1 for Elm City Properties. Note says rent due in 2 days; report lease facts and urgency."
+        },
+        {
+          "order": 2,
+          "to": "accounting",
+          "audit_seq": 390,
+          "task": "Ticket 102: for lease_id 1 rent of $2,400 due September 2, 2026, confirm the current checking balance and whether it covers this linked obligation. If covered, submit a request_payment for $2,400 for lease_id 1 and report the human approval/rejection result; do not request any other ticket's payments."
+        }
+      ],
+      "agents_not_called": [
+        "customer_service",
+        "inventory"
+      ],
+      "mcp_tools_used": [
+        "list_open_tickets",
+        "get_lease_rent_due_and_cash_coverage",
+        "get_checking_balance",
+        "request_payment",
+        "update_ticket_status"
+      ],
+      "tool_calls": [
+        {
+          "audit_seq": 384,
+          "agent": "boss",
+          "tool": "list_open_tickets",
+          "args": {}
+        },
+        {
+          "audit_seq": 387,
+          "agent": "facilities",
+          "tool": "get_lease_rent_due_and_cash_coverage",
+          "args": {
+            "lease_id": 1
+          }
+        },
+        {
+          "audit_seq": 391,
+          "agent": "accounting",
+          "tool": "get_lease_rent_due_and_cash_coverage",
+          "args": {
+            "lease_id": 1
+          }
+        },
+        {
+          "audit_seq": 392,
+          "agent": "accounting",
+          "tool": "get_checking_balance",
+          "args": {}
+        },
+        {
+          "audit_seq": 395,
+          "agent": "accounting",
+          "tool": "request_payment",
+          "args": {
+            "kind": "rent",
+            "ref_id": 1,
+            "amount": 2400
+          }
+        },
+        {
+          "audit_seq": 400,
+          "agent": "boss",
+          "tool": "update_ticket_status",
+          "args": {
+            "ticket_id": 102,
+            "status": "resolved",
+            "note": "Facilities confirmed lease 1 rent of $2,400 due September 2, 2026. Accounting confirmed $2,560 checking balance covered rent and submitted the $2,400 payment; human approved, payment recorded paid (payment ID 2), leaving $160."
+          }
+        }
+      ],
+      "human_decisions": [
+        {
+          "audit_seq": 397,
+          "kind": "payment",
+          "decision": "approved",
+          "decided_by": "Kanushri"
+        }
+      ],
+      "cash_moved": 2400.0,
+      "status_set_by_boss": {
+        "audit_seq": 401,
+        "previous": "open",
+        "new": "resolved"
+      },
+      "ticket_notes": "Email: shop rent due in 2 days. | [2026-08-31 resolved] Facilities confirmed lease 1 rent of $2,400 due September 2, 2026. Accounting confirmed $2,560 checking balance covered rent and submitted the $2,400 payment; human approved, payment recorded paid (payment ID 2), leaving $160.",
+      "boss_final_report": "### Ticket 102 — Elm City Properties\n\n- **Request:** Confirm and handle rent due for lease 1.\n- **Key facts:** Facilities confirmed monthly rent of **$2,400**, due **September 2, 2026**—two days after the shop date of August 31, 2026, and not overdue. Accounting confirmed the checking balance was **$2,560**, enough to cover rent.\n- **Actions taken:** Accounting requested the **$2,400** rent payment. The payment was recorded as paid (payment ID 2); the remaining checking balance is **$160**. Ticket marked **resolved**.\n- **Human approval:** Approved.\n- **Customer message drafted:** None needed.\n- **Still pending:** Nothing for this ticket.",
+      "usage": {
+        "requests": 10,
+        "tool_calls": 8,
+        "input_tokens": 22995,
+        "output_tokens": 815
+      },
+      "delegation_count": 2,
+      "outcome": {
+        "rent_paid": 2400.0,
+        "lease_previous_due": "2026-09-02",
+        "lease_next_due": "2026-10-02",
+        "customer_reply": "none (landlord is not a customer)"
+      }
+    },
+    {
+      "ticket_id": 103,
+      "type": "price_override",
+      "requester": "Yale AI Club",
+      "subject": "Bulk hoodie discount",
+      "request": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+      "final_status": "resolved",
+      "run_id": "20261012-103013-77fb78",
+      "audit_seq_range": [
+        404,
+        426
+      ],
+      "started_at": "2026-10-12T14:30:13+00:00",
+      "finished_at": "2026-10-12T14:33:41+00:00",
+      "boss_called_first": "inventory",
+      "delegations": [
+        {
+          "order": 1,
+          "to": "inventory",
+          "audit_seq": 409,
+          "task": "Ticket 103: For the price_override request, check SKU CC-HOOD-NAVY, size M, qty 20. Report current stock, shortfall, unit_cost, list_price, and margin. Do not draft a restock; no vendor is linked."
+        },
+        {
+          "order": 2,
+          "to": "customer_service",
+          "audit_seq": 417,
+          "task": "Ticket 103, requester Yale AI Club: Draft (do not send) a reply. Confirmed facts: request is for 20 CC-HOOD-NAVY hoodies, size M; stock on hand is 8, shortfall is 12; list price $58/unit; human Kanushri approved $50/unit for this request. No vendor is linked, and no restock/arrival date is available. Clearly state approved price and stock limitation without promising fulfillment or an arrival."
+        }
+      ],
+      "agents_not_called": [
+        "accounting",
+        "facilities"
+      ],
+      "mcp_tools_used": [
+        "list_open_tickets",
+        "get_stock_and_margin_for_bulk_order",
+        "request_discount_decision",
+        "draft_customer_message",
+        "update_ticket_status"
+      ],
+      "tool_calls": [
+        {
+          "audit_seq": 407,
+          "agent": "boss",
+          "tool": "list_open_tickets",
+          "args": {}
+        },
+        {
+          "audit_seq": 410,
+          "agent": "inventory",
+          "tool": "get_stock_and_margin_for_bulk_order",
+          "args": {
+            "sku": "CC-HOOD-NAVY",
+            "size": "M",
+            "qty": 20
+          }
+        },
+        {
+          "audit_seq": 413,
+          "agent": "boss",
+          "tool": "request_discount_decision",
+          "args": {
+            "ticket_id": 103,
+            "unit_price": 50
+          }
+        },
+        {
+          "audit_seq": 418,
+          "agent": "customer_service",
+          "tool": "get_stock_and_margin_for_bulk_order",
+          "args": {
+            "sku": "CC-HOOD-NAVY",
+            "size": "M",
+            "qty": 20
+          }
+        },
+        {
+          "audit_seq": 420,
+          "agent": "customer_service",
+          "tool": "draft_customer_message",
+          "args": {
+            "ticket_id": 103,
+            "message": "Thank you for reaching out about 20 size M hoodies. We currently have 8 available, so we’re short 12 for the full request. Kanushri has approved a price of $50 per hoodie for this request. We don’t have a confirmed restock or arrival date, so we can’t promise when the remaining 12 will be available."
+          }
+        },
+        {
+          "audit_seq": 423,
+          "agent": "boss",
+          "tool": "update_ticket_status",
+          "args": {
+            "ticket_id": 103,
+            "status": "resolved",
+            "note": "Inventory reported 8 CC-HOOD-NAVY size M on hand, 12 short for qty 20; unit cost $22, list price $58, margin $36/unit. Human Kanushri approved $50/unit. Customer Service saved a reply draft stating price and stock limitation; no vendor link or arrival date."
+          }
+        }
+      ],
+      "human_decisions": [
+        {
+          "audit_seq": 415,
+          "kind": "discount",
+          "decision": "approved",
+          "decided_by": "Kanushri"
+        }
+      ],
+      "cash_moved": 0,
+      "status_set_by_boss": {
+        "audit_seq": 424,
+        "previous": "open",
+        "new": "resolved"
+      },
+      "ticket_notes": "Student org wants 20 hoodies, size M, asking for a bulk discount. | [2026-08-31 discount decision] APPROVED $50.00/unit for 20 x CC-HOOD-NAVY size M by Kanushri (list $58.00, cost $22.00); catalogue price unchanged. | [2026-08-31 resolved] Inventory reported 8 CC-HOOD-NAVY size M on hand, 12 short for qty 20; unit cost $22, list price $58, margin $36/unit. Human Kanushri approved $50/unit. Customer Service saved a reply draft stating price and stock limitation; no vendor link or arrival date.",
+      "boss_final_report": "### Ticket 103 — Yale AI Club\n\n- **Request:** 20 CC-HOOD-NAVY hoodies, size M, with a bulk discount.\n- **Key facts:** Inventory reported 8 on hand, leaving a shortfall of 12. Unit cost is **$22**, list price **$58**, and margin at list price is **$36 per unit**. No vendor is linked, so there is no restock or arrival date available.\n- **Actions taken:** Inventory checked stock and pricing. A customer reply draft was saved; it states the approved price and stock limitation, without promising fulfillment or an arrival date.\n- **Human decision:** Kanushri **approved $50 per unit** for this request. No payment was expected or requested.\n- **Drafted message:** “Thank you for reaching out about 20 size M hoodies. We currently have 8 available, so we’re short 12 for the full request. Kanushri has approved a price of $50 per hoodie for this request. We don’t have a confirmed restock or arrival date, so we can’t promise when the remaining 12 will be available.”\n- **Status:** Resolved.\n- **Still pending:** Availability of the remaining 12; no expected date is available.",
+      "usage": {
+        "requests": 11,
+        "tool_calls": 8,
+        "input_tokens": 25429,
+        "output_tokens": 1039
+      },
+      "delegation_count": 2,
+      "outcome": {
+        "on_hand": 8,
+        "shortfall": 12,
+        "unit_cost": 22.0,
+        "list_price": 58.0,
+        "discount_decision": "approved",
+        "approved_unit_price": 50.0,
+        "decided_by": "Kanushri",
+        "order_total_at_approved_price": 1000.0,
+        "order_total_at_list": 1160.0,
+        "cash_changed": false,
+        "catalogue_price_changed": false,
+        "catalogue_price_after": 58.0,
+        "restock": "none (no vendor linked to CC-HOOD-NAVY in the data)",
+        "customer_reply_draft": {
+          "file": "output/customer_drafts/ticket_103.md",
+          "sent": false
+        }
+      }
+    }
+  ],
+  "not_from_final_run": [
+    "output/restock_requests/vendor1_CC-HOOD-NAVY_M.json was saved by an earlier test run (2026-10-11), not by this final run, and is not part of these results."
+  ]
+}

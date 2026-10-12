@@ -1,0 +1,16 @@
+{
+  "status": "DRAFT - not sent",
+  "created_on": "2026-08-31",
+  "vendor": {
+    "id": 1,
+    "name": "Bulldog Print Co",
+    "specialty": "apparel reprint",
+    "lead_days": 5
+  },
+  "sku": "CC-TEE-WHITE",
+  "size": "S",
+  "item_name": "Classic Bulldog Tee",
+  "qty": 1,
+  "on_hand_qty_at_request": 0,
+  "expected_arrival": "2026-09-05"
+}
